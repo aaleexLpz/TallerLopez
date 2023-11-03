@@ -1,0 +1,15 @@
+spring:
+    devtools:
+        restart:
+            trigger-file: reload
+        livereload:
+            enables: false
+    datasource:
+        username: root
+        password: root
+        url: jdbc:mysql://localhost:3307/workshop_db
+    jpa:
+        hibernate:
+            ddl-auto: update
+        jackson:
+            default-property-inclusion: NON_NULL
