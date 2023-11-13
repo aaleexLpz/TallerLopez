@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class MechanicReadDto {
 
+    private String Dni;
+
     private String name;
 
     private String lastName;

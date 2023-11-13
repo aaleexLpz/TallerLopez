@@ -1,0 +1,395 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+#  /home:
+
+  /car/create:
+    post:
+      tags:
+        - car-controller
+      operationId: postCar
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarCreateDto'
+
+  /car/read/{carId}:
+    get:
+      tags:
+        -
+
+components:
+  schemas:
+    CarDto:
+      required:
+        - id
+        - brand
+        - model
+        - owner
+        - mechanic
+        - color
+        - tuition
+
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        brand:
+          type: string
+        model:
+          type: string
+        owner:
+          type: string
+        mechanic:
+          type: string
+        workshop:
+          type: integer
+          format: int64
+        color:
+          type: string
+        tuition:
+          type: string
+
+
+    CarCreateDto:
+      required:
+        - brand
+        - model
+        - owner
+        - mechanic
+        - workshop
+        - color
+        - tuition
+
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        owner:
+          type: string
+        mechanic:
+          type: string
+        workshop:
+          type: integer
+          format: int64
+        color:
+          type: string
+        tuition:
+          type: string
+
+
+    CarReadDto:
+      required:
+        - id
+        - brand
+        - model
+        - owner
+        - mechanic
+        - workshop
+        - color
+        - tuition
+
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        brand:
+          type: string
+        model:
+          type: string
+        owner:
+          type: string
+        mechanic:
+          type: string
+        workshop:
+          type: integer
+          format: int64
+        color:
+          type: string
+        tuition:
+          type: string
+
+
+    CarUpdateDto:
+      required:
+        - brand
+        - model
+        - owner
+        - mechanic
+        - workshop
+        - color
+        - tuition
+
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        owner:
+          type: string
+        mechanic:
+          type: string
+        workshop:
+          type: integer
+          format: int64
+        color:
+          type: string
+        tuition:
+          type: string
+
+
+    CarPatchDto:
+      required:
+        - brand
+        - model
+        - owner
+        - mechanic
+        - workshop
+        - color
+        - tuition
+
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        mechanic:
+          type: string
+        workshop:
+          type: integer
+          format: int64
+        color:
+          type: string
+        tuition:
+          type: string
+
+
+    ClientDto:
+      required:
+        - Dni
+        - name
+        - lastName
+        - phone
+        - car
+
+      type: object
+      properties:
+        Dni:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64
+
+
+    ClientCreateDto:
+      required:
+        - name
+        - lastName
+        - phone
+        - car
+
+      type: object
+      properties:
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64
+
+
+    ClientReadDto:
+      required:
+        - Dni
+        - name
+        - lastName
+        - phone
+        - car
+
+      type: object
+      properties:
+        Dni:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64
+
+
+    ClientUpdateDto:
+      required:
+        - name
+        - lastName
+        - phone
+        - car
+
+      type: object
+      properties:
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64
+
+
+    ClientPatchDto:
+      required:
+        - name
+        - lastName
+        - phone
+        - car
+
+      type: object
+      properties:
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64
+
+
+    MechanicDto:
+      required:
+        - Dni
+        - name
+        - lastName
+        - phone
+        - workshop
+        - car
+
+      type: object
+      properties:
+        Dni:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        workshop:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64
+
+
+    MechanicCreateDto:
+      required:
+        - name
+        - lastName
+        - phone
+        - workshop
+        - car
+
+      type: object
+      properties:
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        workshop:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64
+
+
+    MechanicReadDto:
+      required:
+        - Dni
+        - name
+        - lastName
+        - phone
+        - workshop
+        - car
+
+      type: object
+      properties:
+        Dni:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        workshop:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64
+
+
+    MechanicUpdateDto:
+      required:
+        - name
+        - lastName
+        - phone
+        - workshop
+        - car
+
+      type: object
+      properties:
+        name:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        workshop:
+          type: integer
+          format: int64
+        car:
+          type: integer
+          format: int64

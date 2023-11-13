@@ -26,40 +26,40 @@ public class CarsController {
         this.workshopServiceCar = workshopServiceCar;
     }
 
-    @GetMapping({"/","/home",""})
+    @GetMapping({"/home"})
     public String showHome(){
         return "index";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/car/create")
     public ResponseEntity<CarDto> creatingCar(CarCreateDto carCreateDto) throws InstanceNotFoundException{
         workshopServiceCar.createCar(carMapper.createToCar(carCreateDto));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/readAllCars")
+    @GetMapping("/car/readAllCars")
     public String readingAllCars() throws InstanceNotFoundException{
         return "carsInWorkshop";
     }
 
-    @GetMapping("/readCar/{carId}")
+    @GetMapping("/car/read/{carId}")
     public ResponseEntity<CarReadDto> readingCar(@PathVariable long carId, CarReadDto carReadDto) throws InstanceNotFoundException{
         return new ResponseEntity<>(carMapper.carToRead(workshopServiceCar.readCar(carId)), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{carId}")
+    @PutMapping("/car/update/{carId}")
     public ResponseEntity<CarUpdateDto> updateCar(@PathVariable long carId, CarUpdateDto carUpdateDto) throws InstanceNotFoundException {
         workshopServiceCar.updateCar(carId, carMapper.updateToCar(carUpdateDto));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/patch/{carId}")
+    @PatchMapping("/car/patch/{carId}")
     public ResponseEntity<CarPatchDto> patchCar(@PathVariable long carId, CarPatchDto carPatchDto) throws InstanceNotFoundException{
         workshopServiceCar.patchCar(carId, carMapper.patchToCar(carPatchDto));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{carId}")
+    @DeleteMapping("/car/delete/{carId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeCar(@PathVariable long carId){
         workshopServiceCar.deleteCar(carId);
