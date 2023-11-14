@@ -6,7 +6,6 @@ servers:
   - url: http://localhost:8080
     description: Generated server url
 paths:
-#  /home:
 
   /car/create:
     post:
@@ -24,7 +23,261 @@ paths:
   /car/read/{carId}:
     get:
       tags:
-        -
+        - car-controller
+      operationId: getCar
+      parameters:
+        - name: carId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarReadDto'
+
+  /car/update/{carId}:
+    put:
+      tags:
+        - car-controller
+      operationId: updateCar
+      parameters:
+        - name: carId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/compnents/schemas/CarUpdateDto'
+
+    /car/patch/{carId}:
+      patch:
+        tags:
+          - car-controller
+        operationId: patchCar
+        parameters:
+          - name: carId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/CarPatchDto'
+
+    /car/delete/{carId}:
+      delete:
+        tags:
+          - car-controller
+        operationId: deleteCar
+        parameters:
+          - name: carId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/CarDto'
+
+    /client/read/{DNI}:
+      get:
+        tags:
+          - client-controller
+        operationId: getClient
+        parameters:
+          - name: DNI
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/ClientReadDto'
+
+    /client/create:
+      post:
+        tags:
+          - client-controller
+        operationId: postClient
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/ClientCreateDto'
+
+    /client/update/{DNI}:
+      update:
+        tags:
+          - client-controller
+        operationId: updateClient
+        parameters:
+          - name: DNI
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/ClientUpdateDto'
+
+    /client/patch/{DNI}:
+      patch:
+        tags:
+          - client-controller
+        operationId: patchClient
+        parameters:
+          - name: DNI
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/ClientPatchDto'
+
+    /client/delete/{DNI}:
+      delete:
+        tags:
+          - client-controller
+        operationId: deleteClient
+        parameters:
+          - name: DNI
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/ClientDto'
+
+    /mechanic/read/{DNI}:
+      get:
+        tags:
+          - mechanic-controller
+        operationId: getMechanic
+        parameters:
+          - name: DNI
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/MechanicReadDto'
+
+    /mechanic/create:
+      post:
+        tags:
+          - mechanic-controller
+        operationId: postMechanic
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '/#/components/schemas/MechanicCreateDto'
+
+    /mechanic/update/{DNI}:
+      update:
+        tags:
+          - mechanic-controller
+        operationId: updateMechanic
+        parameters:
+          - name: DNI
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '/#/components/schemas/MechanicUpdateDto'
+
+    /mechanic/patch/{DNI}:
+      patch:
+        tags:
+          - mechanic-controller
+        operationId: patchMechanic
+        parameters:
+          - name: DNI
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+
+    /mechanic/delete/{DNI}:
+      delete:
+        tags:
+          - mechanic-controller
+        operationId: deleteMechanic
+        parameters:
+          - name: DNI
+            in: path
+            required: true
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+
 
 components:
   schemas:

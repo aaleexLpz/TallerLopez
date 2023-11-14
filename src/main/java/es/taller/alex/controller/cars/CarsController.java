@@ -26,20 +26,10 @@ public class CarsController {
         this.workshopServiceCar = workshopServiceCar;
     }
 
-    @GetMapping({"/home"})
-    public String showHome(){
-        return "index";
-    }
-
     @PostMapping("/car/create")
     public ResponseEntity<CarDto> creatingCar(CarCreateDto carCreateDto) throws InstanceNotFoundException{
         workshopServiceCar.createCar(carMapper.createToCar(carCreateDto));
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @GetMapping("/car/readAllCars")
-    public String readingAllCars() throws InstanceNotFoundException{
-        return "carsInWorkshop";
     }
 
     @GetMapping("/car/read/{carId}")
