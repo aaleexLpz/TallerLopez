@@ -1,9 +1,11 @@
-package es.taller.alex.controller.dtos.car_dto;
+package es.taller.alex.controller.dtos.car;
 
 import lombok.Data;
 
 @Data
-public class CarPatchDto {
+public class CarDto {
+
+    private Long id;
 
     private String brand;
 
@@ -18,4 +20,5 @@ public class CarPatchDto {
     private String color;
 
     private String tuition;
+
 }

@@ -1,9 +1,9 @@
 package es.taller.alex.controller.dtos.mapper;
 
-import es.taller.alex.controller.dtos.client_dto.ClientCreateDto;
-import es.taller.alex.controller.dtos.client_dto.ClientPatchDto;
-import es.taller.alex.controller.dtos.client_dto.ClientReadDto;
-import es.taller.alex.controller.dtos.client_dto.ClientUpdateDto;
+import es.taller.alex.controller.dtos.client.ClientCreateDto;
+import es.taller.alex.controller.dtos.client.ClientPatchDto;
+import es.taller.alex.controller.dtos.client.ClientReadDto;
+import es.taller.alex.controller.dtos.client.ClientUpdateDto;
 import es.taller.alex.model.entities.Client;
 import org.mapstruct.Mapper;
 

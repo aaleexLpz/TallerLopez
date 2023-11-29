@@ -1,11 +1,9 @@
-package es.taller.alex.controller.dtos.client_dto;
+package es.taller.alex.controller.dtos.client;
 
 import lombok.Data;
 
 @Data
-public class ClientDto {
-
-    private String Dni;
+public class ClientCreateDto {
 
     private String name;
 

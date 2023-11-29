@@ -1,4 +1,4 @@
-package es.taller.alex.controller.dtos.mechanic_dto;
+package es.taller.alex.controller.dtos.mechaic;
 
 import lombok.Data;
 

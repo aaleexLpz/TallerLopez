@@ -4,7 +4,6 @@ import es.taller.alex.model.entities.Car;
 import es.taller.alex.model.entities.CarDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import es.taller.alex.model.entities.*;
 
 import javax.management.InstanceNotFoundException;
 import java.util.Optional;
@@ -22,60 +21,76 @@ public abstract class WorkshopServiceImplCar implements WorkshopServiceCar {
 
     @Override
     public Car readCar(Long carId) throws InstanceNotFoundException {
-        Optional<Car> car = carDao.findById(carId);
-        if(car.isEmpty()) throw new InstanceNotFoundException("car");
-        return car.get();
-    }
-
-    @Override
-    public void updateCar(Long carId, Car updatedCar) throws InstanceNotFoundException {
-        Optional<Car> car = carDao.findById(carId);
-        updatedCar.setId(carId);
-
-        if(car.isEmpty()) throw new InstanceNotFoundException("car");
-
-        carDao.save(updatedCar);
-    }
-
-    @Override
-    public void patchCar(Long carId, Car patchedCar) throws InstanceNotFoundException {
         Optional<Car> optionalCar = carDao.findById(carId);
 
-        if(!optionalCar.isPresent()){
-            throw new InstanceNotFoundException("Car");
+        if (optionalCar.isEmpty()) {
+            throw new InstanceNotFoundException("Car not found with ID: " + carId);
         }
+
+        return optionalCar.get();
+    }
+
+
+    @Override
+    public void updateCar(Long carId) throws InstanceNotFoundException {
+        Optional<Car> optionalCar = carDao.findById(carId);
+
+        if (optionalCar.isEmpty()) {
+            throw new InstanceNotFoundException("Car not found with ID: " + carId);
+        }
+
+        Car existingCar = optionalCar.get();
+        // Realiza las actualizaciones necesarias en el objeto Car
+        // Por ejemplo, existingCar.setNombreNuevo(nombreNuevo);
+
+        carDao.save(existingCar);
+    }
+
+
+    @Override
+    public void patchCar(Long carId, String brand, String model, String owner, String mechanic, Long workshop,
+                         String color, String tuition) throws InstanceNotFoundException {
+        Optional<Car> optionalCar = carDao.findById(carId);
+
+        if (optionalCar.isEmpty()) {
+            throw new InstanceNotFoundException("Car not found with ID: " + carId);
+        }
+
         Car existingCar = optionalCar.get();
 
-        if(patchedCar.getBrand() != null){
-            existingCar.setBrand(patchedCar.getBrand());
+        if (brand != null) {
+            existingCar.setBrand(brand);
         }
 
-        if(patchedCar.getModel() != null){
-            existingCar.setModel(patchedCar.getModel());
+        if (model != null) {
+            existingCar.setModel(model);
         }
 
-        if(patchedCar.getOwner() != null){
-            existingCar.setOwner(patchedCar.getOwner());
+        if (owner != null) {
+            existingCar.setOwner(owner);
         }
 
-        if(patchedCar.getMechanic() != null){
-            existingCar.setMechanic(patchedCar.getMechanic());
+        if (mechanic != null) {
+            existingCar.setMechanic(mechanic);
         }
 
-        if(patchedCar.getWorkshop() != null){
-            existingCar.setWorkshop(patchedCar.getWorkshop());
+        if (workshop != null) {
+            existingCar.setWorkshop(workshop);
         }
 
-        if(patchedCar.getColor() != null){
-            existingCar.setColor(patchedCar.getColor());
+        if (color != null) {
+            existingCar.setColor(color);
         }
 
-        if(patchedCar.getTuition() != null){
-            existingCar.setTuition(patchedCar.getTuition());
+        if (tuition != null) {
+            existingCar.setTuition(tuition);
         }
 
         carDao.save(existingCar);
     }
+`
+
+
 
     @Override
     public void deleteCar(Long carId){

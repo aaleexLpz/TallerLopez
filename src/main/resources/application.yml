@@ -1,9 +1,4 @@
 spring:
-    devtools:
-        restart:
-            trigger-file: reload
-        livereload:
-            enables: false
     datasource:
         username: root
         password: root

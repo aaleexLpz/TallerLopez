@@ -1,9 +1,9 @@
-package es.taller.alex.controller.dtos.car_dto;
+package es.taller.alex.controller.dtos.car;
 
-public class CarCreateDto {
+public class CarUpdateDto {
 
     private String brand;
-
+    
     private String model;
 
     private String owner;
@@ -16,12 +16,11 @@ public class CarCreateDto {
 
     private String tuition;
 
-    public CarCreateDto(){
+    public CarUpdateDto(){
 
     }
 
-    public CarCreateDto(String brand, String model, String owner, String mechanic, Long workshop, String color,
-                        String tuition){
+    public CarUpdateDto(String brand, String model, String owner, String mechanic, Long workshop, String color, String tuition){
 
         this.brand = brand;
         this.model = model;

@@ -1,6 +1,6 @@
 package es.taller.alex.controller.clients;
 
-import es.taller.alex.controller.dtos.client_dto.*;
+import es.taller.alex.controller.dtos.client.*;
 import es.taller.alex.controller.dtos.mapper.ClientMapper;
 import es.taller.alex.model.services.WorkshopServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;

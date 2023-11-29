@@ -1,17 +1,17 @@
-package es.taller.alex.controller.dtos.mechanic_dto;
+package es.taller.alex.controller.dtos.client;
 
 import lombok.Data;
 
 @Data
-public class MechanicCreateDto {
+public class ClientDto {
+
+    private String Dni;
 
     private String name;
 
     private String lastName;
 
     private Long phone;
-
-    private Long workshop;
 
     private Long car;
 }

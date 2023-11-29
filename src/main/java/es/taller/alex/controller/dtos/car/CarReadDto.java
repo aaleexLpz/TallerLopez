@@ -1,9 +1,11 @@
-package es.taller.alex.controller.dtos.car_dto;
+package es.taller.alex.controller.dtos.car;
 
-public class CarUpdateDto {
+public class CarReadDto {
+
+    private Long id;
 
     private String brand;
-    
+
     private String model;
 
     private String owner;
@@ -16,12 +18,13 @@ public class CarUpdateDto {
 
     private String tuition;
 
-    public CarUpdateDto(){
+    public CarReadDto(){
 
     }
 
-    public CarUpdateDto(String brand, String model, String owner, String mechanic, Long workshop, String color, String tuition){
-
+    public CarReadDto(Long id, String brand, String model, String owner, String mechanic, Long workshop, String color
+            , String tuition){
+        this.id = id;
         this.brand = brand;
         this.model = model;
         this.owner = owner;
@@ -31,20 +34,20 @@ public class CarUpdateDto {
         this.tuition = tuition;
     }
 
-    public String getBrand() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getBrand(){
         return brand;
     }
 
     public void setBrand(String brand) {
         this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getOwner() {
@@ -57,6 +60,10 @@ public class CarUpdateDto {
 
     public String getMechanic() {
         return mechanic;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public void setMechanic(String mechanic) {

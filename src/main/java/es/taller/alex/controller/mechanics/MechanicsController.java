@@ -1,7 +1,7 @@
 package es.taller.alex.controller.mechanics;
 
 import es.taller.alex.controller.dtos.mapper.MechanicMapper;
-import es.taller.alex.controller.dtos.mechanic_dto.*;
+import es.taller.alex.controller.dtos.mechaic.*;
 import es.taller.alex.model.services.WorkshopServiceMechanic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

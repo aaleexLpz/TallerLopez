@@ -278,7 +278,6 @@ paths:
               schema:
                 type: string
 
-
 components:
   schemas:
     CarDto:
@@ -290,7 +289,6 @@ components:
         - mechanic
         - color
         - tuition
-
       type: object
       properties:
         id:
@@ -312,7 +310,6 @@ components:
         tuition:
           type: string
 
-
     CarCreateDto:
       required:
         - brand
@@ -322,7 +319,6 @@ components:
         - workshop
         - color
         - tuition
-
       type: object
       properties:
         brand:
@@ -340,7 +336,6 @@ components:
           type: string
         tuition:
           type: string
-
 
     CarReadDto:
       required:
@@ -352,7 +347,6 @@ components:
         - workshop
         - color
         - tuition
-
       type: object
       properties:
         id:
@@ -374,7 +368,6 @@ components:
         tuition:
           type: string
 
-
     CarUpdateDto:
       required:
         - brand
@@ -384,7 +377,6 @@ components:
         - workshop
         - color
         - tuition
-
       type: object
       properties:
         brand:
@@ -403,7 +395,6 @@ components:
         tuition:
           type: string
 
-
     CarPatchDto:
       required:
         - brand
@@ -413,7 +404,6 @@ components:
         - workshop
         - color
         - tuition
-
       type: object
       properties:
         brand:
@@ -430,7 +420,6 @@ components:
         tuition:
           type: string
 
-
     ClientDto:
       required:
         - Dni
@@ -438,7 +427,6 @@ components:
         - lastName
         - phone
         - car
-
       type: object
       properties:
         Dni:
@@ -454,14 +442,12 @@ components:
           type: integer
           format: int64
 
-
     ClientCreateDto:
       required:
         - name
         - lastName
         - phone
         - car
-
       type: object
       properties:
         name:
@@ -474,7 +460,6 @@ components:
         car:
           type: integer
           format: int64
-
 
     ClientReadDto:
       required:
@@ -483,7 +468,6 @@ components:
         - lastName
         - phone
         - car
-
       type: object
       properties:
         Dni:
@@ -499,14 +483,12 @@ components:
           type: integer
           format: int64
 
-
     ClientUpdateDto:
       required:
         - name
         - lastName
         - phone
         - car
-
       type: object
       properties:
         name:
@@ -519,7 +501,6 @@ components:
         car:
           type: integer
           format: int64
-
 
     ClientPatchDto:
       required:
@@ -527,7 +508,6 @@ components:
         - lastName
         - phone
         - car
-
       type: object
       properties:
         name:
@@ -540,7 +520,6 @@ components:
         car:
           type: integer
           format: int64
-
 
     MechanicDto:
       required:
@@ -550,7 +529,6 @@ components:
         - phone
         - workshop
         - car
-
       type: object
       properties:
         Dni:
@@ -569,7 +547,6 @@ components:
           type: integer
           format: int64
 
-
     MechanicCreateDto:
       required:
         - name
@@ -577,7 +554,6 @@ components:
         - phone
         - workshop
         - car
-
       type: object
       properties:
         name:
@@ -593,7 +569,6 @@ components:
         car:
           type: integer
           format: int64
-
 
     MechanicReadDto:
       required:
@@ -622,7 +597,6 @@ components:
           type: integer
           format: int64
 
-
     MechanicUpdateDto:
       required:
         - name
@@ -630,7 +604,6 @@ components:
         - phone
         - workshop
         - car
-
       type: object
       properties:
         name:

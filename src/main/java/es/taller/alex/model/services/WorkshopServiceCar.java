@@ -14,9 +14,9 @@ public interface WorkshopServiceCar {
 
     public Car readCar(Long carId) throws InstanceNotFoundException;
 
-    public void updateCar(Long carId, Car car) throws InstanceNotFoundException;
+    public void updateCar(Long carId) throws InstanceNotFoundException;
 
-    public void patchCar(Long carId, Car car) throws InstanceNotFoundException;
+    public void patchCar(Long carId, String brand, String model, String owner, String mechanic, Long workshop, String color, String tuition) throws InstanceNotFoundException;
 
     public void deleteCar(Long carId);
 }
