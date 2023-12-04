@@ -1,7 +1,7 @@
 package es.taller.alex.model.services;
 
 import es.taller.alex.model.entities.Client;
-import es.taller.alex.model.entities.ClientDao;
+import es.taller.alex.model.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +12,11 @@ import java.util.Optional;
 public class WorkshopServiceImplClient implements WorkshopServiceClient {
 
     @Autowired
-    ClientDao clientDao;
+    ClientRepository clientRepository;
 
     @Override
     public Client getClient(String DNI) throws InstanceNotFoundException{
-        Optional<Client> client = clientDao.findById(DNI);
+        Optional<Client> client = clientRepository.findById(DNI);
         if(client.isEmpty()) throw new InstanceNotFoundException("client");
 
         return client.get();
@@ -24,22 +24,22 @@ public class WorkshopServiceImplClient implements WorkshopServiceClient {
 
     @Override
     public Client createClient(Client client){
-        return clientDao.save(client);
+        return clientRepository.save(client);
     }
 
     @Override
     public void updateClient(String DNI, Client updatedClient) throws InstanceNotFoundException{
-        Optional<Client> client = clientDao.findById(DNI);
+        Optional<Client> client = clientRepository.findById(DNI);
         updatedClient.setDNI(DNI);
 
         if(client.isEmpty()) throw new InstanceNotFoundException("client");
 
-        clientDao.save(updatedClient);
+        clientRepository.save(updatedClient);
     }
 
     @Override
     public void patchClient(String DNI, Client patchedClient) throws InstanceNotFoundException{
-        Optional<Client> optionalClient = clientDao.findById(DNI);
+        Optional<Client> optionalClient = clientRepository.findById(DNI);
 
         if(!optionalClient.isPresent()){
             throw new InstanceNotFoundException("Client");
@@ -58,11 +58,11 @@ public class WorkshopServiceImplClient implements WorkshopServiceClient {
             existingClient.setPhone(patchedClient.getPhone());
         }
 
-        clientDao.save(existingClient);
+        clientRepository.save(existingClient);
     }
 
     @Override
     public void deleteClient(String DNI){
-        clientDao.deleteById(DNI);
+        clientRepository.deleteById(DNI);
     }
 }
