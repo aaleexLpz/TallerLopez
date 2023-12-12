@@ -5,56 +5,59 @@ import es.taller.alex.controller.dtos.mapper.ClientMapper;
 import es.taller.alex.model.services.WorkshopServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.management.InstanceNotFoundException;
 
-@Controller
+@RestController
+@RequestMapping("/client")
 public class ClientsController {
 
     @Autowired
-    private final WorkshopServiceClient workshopServiceClient;
+    private WorkshopServiceClient workshopServiceClient;
 
     @Autowired
     private ClientMapper clientMapper;
 
-    @Autowired
-    public ClientsController(WorkshopServiceClient workshopServiceClient) {
-        this.workshopServiceClient = workshopServiceClient;
+    @GetMapping("/read/{dni}")
+    public ClientReadDto readClient(@PathVariable String dni) {
+        try {
+            return clientMapper.readToClient(workshopServiceClient.getClient(dni));
+        } catch (InstanceNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found", e);
+        }
     }
 
-    @GetMapping("/client/read/{DNI}")
-    public ResponseEntity<ClientReadDto> readClient(@PathVariable String DNI) throws InstanceNotFoundException {
-        return new ResponseEntity<>(clientMapper.readToClient(workshopServiceClient.getClient(DNI)), HttpStatus.OK);
-    }
-
-    @PostMapping("/client/create")
-    public ResponseEntity<ClientCreateDto> createClient(@RequestBody ClientCreateDto clientCreateDto, @PathVariable String DNI){
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createClient(@RequestBody ClientCreateDto clientCreateDto, @PathVariable String dni) {
         workshopServiceClient.createClient(clientMapper.createToClient(clientCreateDto));
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/client/update/{DNI}")
-    public ResponseEntity<ClientUpdateDto> updateClient(@PathVariable String DNI, @RequestBody ClientUpdateDto clientUpdateDto)
-            throws InstanceNotFoundException {
-        workshopServiceClient.updateClient(DNI, clientMapper.updateToClient(clientUpdateDto));
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PutMapping("/update/{dni}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateClient(@PathVariable String dni, @RequestBody ClientUpdateDto clientUpdateDto) {
+        try {
+            workshopServiceClient.updateClient(dni, clientMapper.updateToClient(clientUpdateDto));
+        } catch (InstanceNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found", e);
+        }
     }
 
-    @PatchMapping("/client/patch/{DNI}")
-    public ResponseEntity<ClientPatchDto> patchClient(@PathVariable String DNI, @RequestBody ClientPatchDto clientPatchDto) throws InstanceNotFoundException{
-        workshopServiceClient.patchClient(DNI, clientMapper.patchToClient(clientPatchDto));
-
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PatchMapping("/patch/{dni}")
+    @ResponseStatus(HttpStatus.OK)
+    public void patchClient(@PathVariable String dni, @RequestBody ClientPatchDto clientPatchDto) {
+        try {
+            workshopServiceClient.patchClient(dni, clientMapper.patchToClient(clientPatchDto));
+        } catch (InstanceNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found", e);
+        }
     }
 
-    @DeleteMapping("/client/delete/{DNI}")
+    @DeleteMapping("/delete/{dni}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteClient(@PathVariable String DNI){
-        workshopServiceClient.deleteClient(DNI);
+    public void deleteClient(@PathVariable String dni) {
+        workshopServiceClient.deleteClient(dni);
     }
 }
-

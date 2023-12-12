@@ -15,46 +15,47 @@ public class WorkshopServiceImplClient implements WorkshopServiceClient {
     ClientRepository clientRepository;
 
     @Override
-    public Client getClient(String DNI) throws InstanceNotFoundException{
+    public Client getClient(String DNI) throws InstanceNotFoundException {
         Optional<Client> client = clientRepository.findById(DNI);
-        if(client.isEmpty()) throw new InstanceNotFoundException("client");
+        if (client.isEmpty()) throw new InstanceNotFoundException("Client not found with DNI: " + DNI);
 
         return client.get();
     }
 
     @Override
-    public Client createClient(Client client){
+    public Client createClient(Client client) {
         return clientRepository.save(client);
     }
 
     @Override
-    public void updateClient(String DNI, Client updatedClient) throws InstanceNotFoundException{
+    public void updateClient(String DNI, Client updatedClient) throws InstanceNotFoundException {
         Optional<Client> client = clientRepository.findById(DNI);
         updatedClient.setDNI(DNI);
 
-        if(client.isEmpty()) throw new InstanceNotFoundException("client");
+        if (client.isEmpty()) throw new InstanceNotFoundException("Client not found with DNI: " + DNI);
 
         clientRepository.save(updatedClient);
     }
 
     @Override
-    public void patchClient(String DNI, Client patchedClient) throws InstanceNotFoundException{
+    public void patchClient(String DNI, Client patchedClient) throws InstanceNotFoundException {
         Optional<Client> optionalClient = clientRepository.findById(DNI);
 
-        if(!optionalClient.isPresent()){
-            throw new InstanceNotFoundException("Client");
+        if (!optionalClient.isPresent()) {
+            throw new InstanceNotFoundException("Client not found with DNI: " + DNI);
         }
+
         Client existingClient = optionalClient.get();
 
-        if(patchedClient.getName() != null){
+        if (patchedClient.getName() != null) {
             existingClient.setName(patchedClient.getName());
         }
 
-        if(patchedClient.getLastName() != null){
+        if (patchedClient.getLastName() != null) {
             existingClient.setLastName(patchedClient.getLastName());
         }
 
-        if(patchedClient.getPhone() != null){
+        if (patchedClient.getPhone() != null) {
             existingClient.setPhone(patchedClient.getPhone());
         }
 
@@ -62,7 +63,7 @@ public class WorkshopServiceImplClient implements WorkshopServiceClient {
     }
 
     @Override
-    public void deleteClient(String DNI){
+    public void deleteClient(String DNI) {
         clientRepository.deleteById(DNI);
     }
 }

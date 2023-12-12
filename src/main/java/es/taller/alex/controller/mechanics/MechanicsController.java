@@ -5,13 +5,13 @@ import es.taller.alex.controller.dtos.mechaic.*;
 import es.taller.alex.model.services.WorkshopServiceMechanic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.management.InstanceNotFoundException;
 
-@Controller
+@RestController
+@RequestMapping("/mechanic")
 public class MechanicsController {
 
     @Autowired
@@ -20,32 +20,44 @@ public class MechanicsController {
     @Autowired
     private WorkshopServiceMechanic workshopServiceMechanic;
 
-    @GetMapping("/mechanic/read/{DNI}")
-    public ResponseEntity<MechanicReadDto> getMechanic(@PathVariable String DNI) throws InstanceNotFoundException{
-        return new ResponseEntity<>(mechanicMapper.mechanicToRead(workshopServiceMechanic.getMechanic(DNI)), HttpStatus.OK);
+    @GetMapping("/read/{dni}")
+    public MechanicReadDto getMechanic(@PathVariable String dni) {
+        try {
+            return mechanicMapper.mechanicToRead(workshopServiceMechanic.getMechanic(dni));
+        } catch (InstanceNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Mechanic not found", e);
+        }
     }
 
-    @PostMapping("/mechanic/create")
-    public ResponseEntity<MechanicDto> createMechanic(@RequestBody MechanicCreateDto mechanicCreateDto){
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createMechanic(@RequestBody MechanicCreateDto mechanicCreateDto) {
         workshopServiceMechanic.createMechanic(mechanicMapper.createToMechanic(mechanicCreateDto));
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/mechanic/update/{DNI}")
-    public ResponseEntity<MechanicUpdateDto> updateMechanic(@PathVariable String DNI, @RequestBody MechanicUpdateDto mechanicUpdateDto) throws InstanceNotFoundException{
-        workshopServiceMechanic.updateMechanic(DNI, mechanicMapper.updateToMechanic(mechanicUpdateDto));
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PutMapping("/update/{dni}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateMechanic(@PathVariable String dni, @RequestBody MechanicUpdateDto mechanicUpdateDto) {
+        try {
+            workshopServiceMechanic.updateMechanic(dni, mechanicMapper.updateToMechanic(mechanicUpdateDto));
+        } catch (InstanceNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Mechanic not found", e);
+        }
     }
 
-    @PatchMapping("/mechanic/patch/{DNI}")
-    public ResponseEntity<MechanicPatchDto> patchMechanic(@PathVariable String DNI, @RequestBody MechanicPatchDto mechanicPatchDto) throws InstanceNotFoundException{
-        workshopServiceMechanic.patchMechanic(DNI, mechanicMapper.patchToMechanic(mechanicPatchDto));
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PatchMapping("/patch/{dni}")
+    @ResponseStatus(HttpStatus.OK)
+    public void patchMechanic(@PathVariable String dni, @RequestBody MechanicPatchDto mechanicPatchDto) {
+        try {
+            workshopServiceMechanic.patchMechanic(dni, mechanicMapper.patchToMechanic(mechanicPatchDto));
+        } catch (InstanceNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Mechanic not found", e);
+        }
     }
 
-    @DeleteMapping("/mechanic/delete/{DNI}")
+    @DeleteMapping("/delete/{dni}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMechanic(@PathVariable String DNI){
-        workshopServiceMechanic.deleteMechanic(DNI);
+    public void deleteMechanic(@PathVariable String dni) {
+        workshopServiceMechanic.deleteMechanic(dni);
     }
 }

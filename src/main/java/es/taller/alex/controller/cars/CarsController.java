@@ -5,67 +5,61 @@ import es.taller.alex.controller.dtos.mapper.CarMapper;
 import es.taller.alex.model.services.WorkshopServiceCar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.management.InstanceNotFoundException;
 
 @RestController
+@RequestMapping("/car")
 public class CarsController {
 
     @Autowired
-    public WorkshopServiceCar workshopServiceCar;
+    private WorkshopServiceCar workshopServiceCar;
 
     @Autowired
     private CarMapper carMapper;
 
-    @Autowired
-    public CarsController(
-            WorkshopServiceCar workshopServiceCar){
-        this.workshopServiceCar = workshopServiceCar;
-    }
-
-    @PostMapping("/car/create")
-    public ResponseEntity<CarDto> creatingCar(@RequestBody CarCreateDto carCreateDto) {
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createCar(@RequestBody CarCreateDto carCreateDto) {
         workshopServiceCar.createCar(carMapper.createDtoToCar(carCreateDto));
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/car/read/{carId}")
-    public ResponseEntity<CarReadDto> readingCar(@PathVariable Long carId) {
+    @GetMapping("/read/{carId}")
+    public CarReadDto readCar(@PathVariable Long carId) {
         try {
-            return new ResponseEntity<>(carMapper.carToRead(workshopServiceCar.readCar(carId)), HttpStatus.OK);
+            return carMapper.carToRead(workshopServiceCar.readCar(carId));
         } catch (InstanceNotFoundException e) {
-            // Manejo de la excepción por ejemplo, lanzar HttpStatus.NOT_FOUND
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found", e);
         }
     }
 
-    @PutMapping("/car/update/{carId}")
-    public ResponseEntity<CarUpdateDto> updateCar(@PathVariable Long carId) {
+    @PutMapping("/update/{carId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateCar(@PathVariable Long carId) {
         try {
             workshopServiceCar.updateCar(carId);
-            return new ResponseEntity<>(HttpStatus.OK);
         } catch (InstanceNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found", e);
         }
     }
 
-    @PatchMapping("/car/patch/{carId}")
-    public ResponseEntity<CarPatchDto> patchCar(@PathVariable Long carId, @RequestBody CarPatchDto carPatchDto) {
+    @PatchMapping("/patch/{carId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void patchCar(@PathVariable Long carId, @RequestBody CarPatchDto carPatchDto) {
         try {
-            workshopServiceCar.patchCar(carId, carPatchDto.getBrand(), carPatchDto.getModel(), carPatchDto.getOwner(), carPatchDto.getMechanic(), carPatchDto.getWorkshop(), carPatchDto.getColor(), carPatchDto.getTuition());
-            return new ResponseEntity<>(HttpStatus.OK);
+            workshopServiceCar.patchCar(carId, carPatchDto.getBrand(), carPatchDto.getModel(),
+                    carPatchDto.getOwner(), carPatchDto.getMechanic(), carPatchDto.getWorkshop(),
+                    carPatchDto.getColor(), carPatchDto.getTuition());
         } catch (InstanceNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found", e);
         }
     }
 
-    @DeleteMapping("/car/delete/{carId}")
+    @DeleteMapping("/delete/{carId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> removeCar(@PathVariable long carId) {
+    public void removeCar(@PathVariable long carId) {
         workshopServiceCar.deleteCar(carId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

@@ -9,10 +9,21 @@ import javax.management.InstanceNotFoundException;
 import java.util.Optional;
 
 @Service
-public abstract class WorkshopServiceImplCar implements WorkshopServiceCar {
+public class WorkshopServiceImplCar implements WorkshopServiceCar {
 
     @Autowired
     private CarRepository carRepository;
+
+    @Override
+    public Car getCar(Long carId) throws InstanceNotFoundException {
+        Optional<Car> optionalCar = carRepository.findById(carId);
+
+        if (optionalCar.isEmpty()) {
+            throw new InstanceNotFoundException("Car not found with ID: " + carId);
+        }
+
+        return optionalCar.get();
+    }
 
     @Override
     public void createCar(Car car) {
@@ -30,7 +41,6 @@ public abstract class WorkshopServiceImplCar implements WorkshopServiceCar {
         return optionalCar.get();
     }
 
-
     @Override
     public void updateCar(Long carId) throws InstanceNotFoundException {
         Optional<Car> optionalCar = carRepository.findById(carId);
@@ -45,7 +55,6 @@ public abstract class WorkshopServiceImplCar implements WorkshopServiceCar {
 
         carRepository.save(existingCar);
     }
-
 
     @Override
     public void patchCar(Long carId, String brand, String model, String owner, String mechanic, Long workshop,
@@ -89,10 +98,8 @@ public abstract class WorkshopServiceImplCar implements WorkshopServiceCar {
         carRepository.save(existingCar);
     }
 
-
-
     @Override
-    public void deleteCar(Long carId){
+    public void deleteCar(Long carId) {
         carRepository.deleteById(carId);
     }
 }
