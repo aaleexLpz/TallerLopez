@@ -1,5 +1,8 @@
 package es.taller.alex.controller.dtos.car;
 
+import lombok.Data;
+
+@Data
 public class CarUpdateDto {
 
     private String brand;
@@ -31,59 +34,4 @@ public class CarUpdateDto {
         this.tuition = tuition;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getMechanic() {
-        return mechanic;
-    }
-
-    public void setMechanic(String mechanic) {
-        this.mechanic = mechanic;
-    }
-
-    public Long getWorkshop() {
-        return workshop;
-    }
-
-    public void setWorkshop(Long workshop) {
-        this.workshop = workshop;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getTuition() {
-        return tuition;
-    }
-
-    public void setTuition(String tuition) {
-        this.tuition = tuition;
-    }
 }

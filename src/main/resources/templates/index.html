@@ -3,19 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Home</title>
+    <title>Bienvenido al Sistema</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .top-bar {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .top-bar h2 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .logout-btn {
+            margin-top: 0;
+        }
+
+        .container {
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Agregado sombra */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .left-bar {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            align-items: flex-start;
+        }
+
+        .right-bar {
+            width: 70%;
+            margin-top: 20px;
+        }
+
+        .welcome-message {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .section {
+            margin-top: 20px;
+        }
+
+        .left-bar a {
+            display: block;
+            margin-bottom: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .left-bar a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-success text-white">Home</div>
-                <div class="card-body">
-                    <h5 th:if="${#request.userPrincipal}" th:text="'Welcome, ' + ${#request.userPrincipal.name}"></h5>
-                    <p>This is the home page.</p>
-                    <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
+<body>
+<div class="top-bar">
+    <h2>Talleres López</h2>
+    <a th:href="@{/logout}" class="btn btn-danger logout-btn">Cerrar Sesión</a>
+</div>
+
+<div class="container">
+    <div class="left-bar">
+        <h3>Enlaces de Interés</h3>
+        <a href="#">Honda denuncia...</a>
+        <a href="#">Los nuevos recambios llegarán en...</a>
+        <a href="#">Un nuevo taller abre sus puertas</a>
+    </div>
+
+    <div class="right-bar">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="section">
+                            <h2>Datos de clientes</h2>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Coche</th>
+                                    <th>Mecánico</th>
+                                    <th>Taller</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Juan Flórez</td>
+                                    <td>Toyota Supra</td>
+                                    <td>Jorge Martín</td>
+                                    <td>Salvador de Madariaga</td>
+                                </tr>
+                                <tr>
+                                    <td>Maria Giménez</td>
+                                    <td>Honda Civic EK9</td>
+                                    <td>Pablo Pérez</td>
+                                    <td>Polígono de la Grela</td>
+                                </tr>
+                                <tr>
+                                    <td>Miguel García</td>
+                                    <td>Ford Mustang</td>
+                                    <td>Eva Martínez</td>
+                                    <td>Ribeira Sacra</td>
+                                </tr>
+                                <tr>
+                                    <td>Ada Benítez</td>
+                                    <td>Chevrolet Camaro</td>
+                                    <td>Enrique Maceiras</td>
+                                    <td>Avenida del Ejército</td>
+                                </tr>
+                                <tr>
+                                    <td>Samuel López</td>
+                                    <td>Nissan Skyline R34</td>
+                                    <td>Lía Corbacho</td>
+                                    <td>Cuatro Caminos</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
