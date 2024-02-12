@@ -28,20 +28,4 @@ public class Car {
 
     private String tuition;
 
-    public Car(){
-
-    }
-
-    public Car(Long id, String brand, String model, String owner, String mechanic, Long workshop, String color,
-               String tuition){
-        this.id = id;
-        this.brand = brand;
-        this.model = model;
-        this.owner = owner;
-        this.mechanic = mechanic;
-        this.workshop = workshop;
-        this.color = color;
-        this.tuition = tuition;
-    }
-
 }

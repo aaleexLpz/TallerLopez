@@ -4,7 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 
+@Data
 @Entity
 public class Workshop {
 
@@ -18,42 +20,4 @@ public class Workshop {
 
     private String mechanic;
 
-    public Workshop(Long id, String location, Long car, String mechanic){
-        this.id = id;
-        this.location = location;
-        this.car =  car;
-        this.mechanic = mechanic;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Long getCar() {
-        return car;
-    }
-
-    public void setCar(Long car) {
-        this.car = car;
-    }
-
-    public String getMechanic() {
-        return mechanic;
-    }
-
-    public void setMechanic(String mechanic) {
-        this.mechanic = mechanic;
-    }
 }

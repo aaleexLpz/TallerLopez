@@ -2,6 +2,7 @@ package es.taller.alex.controller.cars;
 
 import es.taller.alex.controller.dtos.car.*;
 import es.taller.alex.controller.dtos.mapper.CarMapper;
+import es.taller.alex.model.entities.Car;
 import es.taller.alex.model.services.WorkshopServiceCar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,8 @@ public class CarsController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createCar(@RequestBody CarCreateDto carCreateDto) {
-        workshopServiceCar.createCar(carMapper.createDtoToCar(carCreateDto));
+    public Car createCar(@RequestBody CarCreateDto carCreateDto) {
+            return workshopServiceCar.createCar(carMapper.createDtoToCar(carCreateDto));
     }
 
     @GetMapping("/read/{carId}")

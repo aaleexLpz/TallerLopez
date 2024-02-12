@@ -1,5 +1,6 @@
 package es.taller.alex.model.services;
 
+import es.taller.alex.controller.dtos.car.CarCreateDto;
 import es.taller.alex.model.entities.Car;
 import es.taller.alex.model.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +16,17 @@ public class WorkshopServiceImplCar implements WorkshopServiceCar {
     private CarRepository carRepository;
 
     @Override
-    public Car getCar(Long carId) throws InstanceNotFoundException {
-        Optional<Car> optionalCar = carRepository.findById(carId);
+    public Car createCar(CarCreateDto carCreateDto) {
+        Car car = new Car();
+        car.setModel(carCreateDto.getModel());
+        car.setBrand(carCreateDto.getBrand());
+        car.setOwner(carCreateDto.getOwner());
+        car.setColor(carCreateDto.getColor());
+        car.setWorkshop(carCreateDto.getWorkshop());
+        car.setTuition(carCreateDto.getTuition());
+        car.setMechanic(carCreateDto.getMechanic());
 
-        if (optionalCar.isEmpty()) {
-            throw new InstanceNotFoundException("Car not found with ID: " + carId);
-        }
-
-        return optionalCar.get();
-    }
-
-    @Override
-    public void createCar(Car car) {
-        carRepository.save(car);
+        return carRepository.save(car);
     }
 
     @Override
@@ -49,11 +48,9 @@ public class WorkshopServiceImplCar implements WorkshopServiceCar {
             throw new InstanceNotFoundException("Car not found with ID: " + carId);
         }
 
-        Car existingCar = optionalCar.get();
-        // Realiza las actualizaciones necesarias en el objeto Car
-        // Por ejemplo, existingCar.setNombreNuevo(nombreNuevo);
+        Car newCar = optionalCar.get();
 
-        carRepository.save(existingCar);
+        carRepository.save(newCar);
     }
 
     @Override
@@ -99,7 +96,7 @@ public class WorkshopServiceImplCar implements WorkshopServiceCar {
     }
 
     @Override
-    public void deleteCar(Long carId) {
+    public void deleteCar (Long carId) {
         carRepository.deleteById(carId);
     }
 }
