@@ -13,7 +13,7 @@ public interface WorkshopServiceMechanic {
     public Mechanic createMechanic(Mechanic mechanic);
 
     public void updateMechanic(String DNI, Mechanic mechanic) throws InstanceNotFoundException;
-
+  
     public void patchMechanic(String DNI, Mechanic mechanic) throws InstanceNotFoundException;
 
     public void deleteMechanic(String DNI);

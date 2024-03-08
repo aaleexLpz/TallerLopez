@@ -36,5 +36,10 @@ public class HomeController {
 
         return "index";
     }
+
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "register";
+    }
 }
 

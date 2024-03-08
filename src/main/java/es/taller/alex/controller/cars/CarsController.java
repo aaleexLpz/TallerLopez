@@ -24,7 +24,7 @@ public class CarsController {
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Car createCar(@RequestBody CarCreateDto carCreateDto) {
-            return workshopServiceCar.createCar(carMapper.createDtoToCar(carCreateDto));
+            return workshopServiceCar.createCar(carCreateDto);
     }
 
     @GetMapping("/read/{carId}")
