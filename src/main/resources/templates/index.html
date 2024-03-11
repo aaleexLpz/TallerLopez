@@ -14,7 +14,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Utiliza el 100% del alto de la ventana */
         }
 
         .top-bar {
@@ -98,7 +98,7 @@
         .container.modo-oscuro {
             background-color: #444;
         }
-        
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -116,82 +116,126 @@
             background-color: #f2f2f2;
         }
 
-        .section h2{
+        .section h2 {
             color: #000000;
         }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+        }
     </style>
-</head>
-<body>
-<div class="top-bar">
-    <h2>Talleres López</h2>
-    <button id="modoOscuroBtn" class="btn btn-dark">Activar Modo Oscuro</button>
-    <a th:href="@{/logout}" class="btn btn-danger logout-btn">Cerrar Sesión</a>
-</div>
-
-<a href="/register">Registro de citas</a>
-
-<div class="container">
-    <div class="left-bar">
-        <h3>Enlaces de Interés</h3>
-        <a href="#">Honda denuncia...</a>
-        <a href="#">Los nuevos recambios llegarán en...</a>
-        <a href="#">Un nuevo taller abre sus puertas</a>
+    </head>
+    <body>
+    <div class="top-bar">
+        <h2>Talleres López</h2>
+        <button id="modoOscuroBtn" class="btn btn-dark">Activar Modo Oscuro</button>
+        <a th:href="@{/logout}" class="btn btn-danger logout-btn">Cerrar Sesión</a>
     </div>
 
-    <div class="right-bar">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="section">
-                            <h2>Datos de clientes</h2>
-                            <table id="tablaClientes" class="table">
-                                <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Coche</th>
-                                    <th>Mecánico</th>
-                                    <th>Taller</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+    <div class="container">
+        <div class="left-bar">
+            <h3>Enlaces de Interés</h3>
+            <a href="#">Honda denuncia...</a>
+            <a href="#">Los nuevos recambios llegarán en...</a>
+            <a href="#">Un nuevo taller abre sus puertas</a>
+        </div>
 
-                                </tbody>
-                            </table>
+        <div class="right-bar">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="section">
+                                <h2>Datos de clientes</h2>
+                                <table id="tablaClientes" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Cliente</th>
+                                            <th>Coche</th>
+                                            <th>Mecánico</th>
+                                            <th>Taller</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function toggleModoOscuro() {
-    const body = document.body;
-    const topBar = document.querySelector('.top-bar');
-    const container = document.querySelector('.container');
-    const tablaClientes = document.querySelector('#tablaClientes');
+    <footer>
+        <p>&copy; 2024 Talleres López. Todos los derechos reservados.</p>
+    </footer>
 
-    if (body.classList.contains('modo-oscuro')) {
-        // Cambiar a modo claro
-        body.classList.remove('modo-oscuro');
-        topBar.classList.remove('modo-oscuro');
-        container.classList.remove('modo-oscuro');
-        tablaClientes.classList.remove('modo-oscuro');
-        document.getElementById('modoOscuroBtn').textContent = 'Activar Modo Oscuro';
-    } else {
-        // Cambiar a modo oscuro
-        body.classList.add('modo-oscuro');
-        topBar.classList.add('modo-oscuro');
-        container.classList.add('modo-oscuro');
-        tablaClientes.classList.add('modo-oscuro');
-        document.getElementById('modoOscuroBtn').textContent = 'Activar Modo Claro';
-    }
-    }
+    <script>
+        fetch('consultData.php')
+            .then(response => response.json())
+            .then(data => {
+                const tabla = document.getElementById('tablaClientes');
+                const tbody = tabla.getElementsByTagName('tbody')[0];
 
-    document.getElementById('modoOscuroBtn').addEventListener('click', toggleModoOscuro);
-</script>
-<script src="consultData.js"></script>
-</body>
+                data.forEach(item => {
+                    const fila = document.createElement('tr');
+
+                    const columna1 = document.createElement('td');
+                    columna1.textContent = item.cliente;
+                    fila.appendChild(columna1);
+
+                    const columna2 = document.createElement('td');
+                    columna2.textContent = item.coche;
+                    fila.appendChild(columna2);
+
+                    const columna3 = document.createElement('td');
+                    columna3.textContent = item.mecanico;
+                    fila.appendChild(columna3);
+
+                    const columna4 = document.createElement('td');
+                    columna4.textContent = item.taller;
+                    fila.appendChild(columna4);
+
+                    tbody.appendChild(fila);
+                });
+            })
+            .catch(error => console.error('Error al obtener los datos:', error));
+    </script>
+
+
+    <script>
+        function toggleModoOscuro() {
+            const body = document.body;
+            const topBar = document.querySelector('.top-bar');
+            const container = document.querySelector('.container');
+            const tablaClientes = document.querySelector('#tablaClientes');
+
+            if (body.classList.contains('modo-oscuro')) {
+                // Cambiar a modo claro
+                body.classList.remove('modo-oscuro');
+                topBar.classList.remove('modo-oscuro');
+                container.classList.remove('modo-oscuro');
+                tablaClientes.classList.remove('modo-oscuro');
+                document.getElementById('modoOscuroBtn').textContent = 'Activar Modo Oscuro';
+            } else {
+                // Cambiar a modo oscuro
+                body.classList.add('modo-oscuro');
+                topBar.classList.add('modo-oscuro');
+                container.classList.add('modo-oscuro');
+                tablaClientes.classList.add('modo-oscuro');
+                document.getElementById('modoOscuroBtn').textContent = 'Modo Claro';
+            }
+        }
+
+            document.getElementById('modoOscuroBtn').addEventListener('click', toggleModoOscuro);
+    </script>
+    </body>
 </html>

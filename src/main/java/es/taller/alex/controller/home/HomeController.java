@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+
 @Controller
 public class HomeController {
 
@@ -28,17 +30,12 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("cars", carRepository.findAll());
-        model.addAttribute("clients", clientRepository.findAll());
-        model.addAttribute("mechanics", mechanicRepository.findAll());
-        model.addAttribute("workshops", workshopRepository.findAll());
-
+    public String home() {
         return "index";
     }
 
     @GetMapping("/register")
-    public String showRegisterPage() {
+    public String showRegister() {
         return "register";
     }
 }
